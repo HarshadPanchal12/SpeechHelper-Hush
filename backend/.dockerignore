@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+temp_audio/
+.git/
+.gitignore
+README.md
+tests/

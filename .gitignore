@@ -1,0 +1,28 @@
+# Node / Next.js
+node_modules/
+.next/
+out/
+*.log
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+!.env.production.example
+!.env.local.example
+
+# Runtime audio
+temp_audio/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

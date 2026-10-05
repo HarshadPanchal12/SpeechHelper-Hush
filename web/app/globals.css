@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Public Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Public Sans Variable", ui-sans-serif, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-noise: var(--noise);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Palette: paper, ink, a deep teal for the cleaned signal, stone for the noise. */
+:root {
+  --radius: 0.75rem;
+  --background: #f1f4f3;
+  --foreground: #0f1c21;
+  --card: #ffffff;
+  --card-foreground: #0f1c21;
+  --popover: #ffffff;
+  --popover-foreground: #0f1c21;
+  --primary: #0a6c74;
+  --primary-foreground: #f4fbfb;
+  --secondary: #e4e9e7;
+  --secondary-foreground: #0f1c21;
+  --muted: #e4e9e7;
+  --muted-foreground: #54646a;
+  --accent: #dfe8e6;
+  --accent-foreground: #0f1c21;
+  --destructive: #b42318;
+  --border: #d5dcda;
+  --input: #c3ccca;
+  --ring: #0a6c74;
+  --noise: #8e8c86;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  header,
+  [data-noprint],
+  button {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  section {
+    break-inside: avoid;
+  }
+}
