@@ -1,5 +1,4 @@
 services:
-  # Next.js frontend
   - type: web
     name: hush-web
     runtime: node
@@ -9,59 +8,57 @@ services:
     startCommand: npm start
     autoDeployTrigger: commit
     envVars:
-      # The backend's public Render URL is injected automatically.
       - key: BACKEND_URL
         fromService:
           type: web
           name: hush-api
           envVarKey: RENDER_EXTERNAL_URL
 
-      # The backend API key stays server-side in Next.js.
       - key: BACKEND_API_KEY
         fromService:
           type: web
           name: hush-api
           envVarKey: DENOISE_API_KEY
 
-      # Optional Clerk configuration.
       - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
         sync: false
+
       - key: CLERK_SECRET_KEY
         sync: false
+
       - key: NEXT_PUBLIC_CLERK_SIGN_IN_URL
         value: /sign-in
+
       - key: NEXT_PUBLIC_CLERK_SIGN_UP_URL
         value: /sign-up
 
-  # FastAPI + DeepFilterNet backend
   - type: web
     name: hush-api
     runtime: docker
     plan: free
     rootDir: backend
-    dockerfilePath: ./backend/Dockerfile
-    dockerContext: ./backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     healthCheckPath: /api/health
     autoDeployTrigger: commit
     envVars:
       - key: DENOISE_API_KEY
         generateValue: true
 
-      # The browser normally talks to Next.js, not this service directly,
-      # but this keeps direct-browser CORS correctly restricted.
       - key: CORS_ORIGINS
-        fromService:
-          type: web
-          name: hush-web
-          envVarKey: RENDER_EXTERNAL_URL
+        value: http://localhost:3000
 
       - key: MAX_UPLOAD_MB
         value: "500"
+
       - key: MAX_DURATION_MIN
         value: "120"
+
       - key: CHUNK_SECONDS
         value: "30"
+
       - key: JOB_TTL_SECONDS
         value: "1800"
+
       - key: HUSH_ENGINE
         value: deepfilternet
