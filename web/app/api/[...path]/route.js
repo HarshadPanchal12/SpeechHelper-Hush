@@ -8,12 +8,10 @@ const BACKEND = (process.env.BACKEND_URL || "http://127.0.0.1:8000").replace(/\/
 const FORWARD_REQUEST = ["content-type", "content-length", "range", "accept"];
 const FORWARD_RESPONSE = [
   "content-type",
-  "content-length",
   "content-disposition",
   "accept-ranges",
   "content-range",
 ];
-
 async function signedIn(req) {
   if (!clerkEnabled) return true;
   const { createClerkClient } = await import("@clerk/backend");
