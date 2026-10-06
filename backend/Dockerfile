@@ -2,10 +2,10 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# FFmpeg is required for formats that libsndfile cannot decode.
-# libsndfile1 is required by soundfile.
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ffmpeg libsndfile1 \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg \
+    libsndfile1 \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
