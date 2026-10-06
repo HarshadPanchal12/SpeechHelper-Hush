@@ -2,8 +2,10 @@ fastapi>=0.115
 uvicorn[standard]>=0.30
 python-multipart>=0.0.9
 soundfile>=0.12.1
-numpy
-# Model stack (install torch/torchaudio the way your platform needs, then DeepFilterNet):
-torch
-torchaudio
-deepfilternet
+numpy<2.0
+
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.1.2+cpu
+torchaudio==2.1.2+cpu
+
+deepfilternet==0.5.6
